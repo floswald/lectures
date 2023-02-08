@@ -1,0 +1,14 @@
+.task {
+  background-color: #ffebf0;
+  color: #353632;
+  text-shadow: none;
+}
+
+/* slightly spacing change */
+.task h1, .task h2, .task h3 {
+  color: #fcf9f7;
+}
+
+.task remark-code-line {
+  background-color: #e0e1df;
+}
