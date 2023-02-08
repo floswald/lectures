@@ -1,9 +1,9 @@
 ---
-title: "Data Science for Economists"
+title: "ScPo Intro to Programming"
 # subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
-subtitle: "Lecture 5: Data cleaning & wrangling: (1) Tidyverse"
-author: "Grant McDermott"
-date: "University of Oregon | [EC 607](https://github.com/uo-ec607)" #"`r format(Sys.time(), '%d %B %Y')`"
+subtitle: "Lecture 7: `R` and the `{tidyverse}`"
+author: "Grant McDermott (U of Oregon) + Florian Oswald"
+date: "SciencesPo Paris | [Intro to Programming](https://floswald.github.io/ScPoProgramming/)" #"`r format(Sys.time(), '%d %B %Y')`"
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts] 
@@ -11,7 +11,6 @@ output:
     nature:
       highlightStyle: github
       highlightLines: true
-      highlightSpans: true
       countIncrementalSlides: false
 ---
 name: toc
@@ -61,7 +60,9 @@ opts_chunk$set(
 class: inverse, center, middle
 name: prologue
 
-# Prologue
+# This beautiful set of slides is largely the work of [Grant McDermott](https://grantmcdermott.com/)
+
+I made some minor adjustments. Thanks Grant!
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
 
