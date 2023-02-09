@@ -1,12 +1,12 @@
 ---
-title: "Data Science for Economists"
+title: "ScPo Intro to Programming"
 # subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
-subtitle: "Lecture 5: Data cleaning & wrangling: (2) data.table"
-author: "Grant McDermott"
-date: "University of Oregon | [EC 607](https://github.com/uo-ec607)" #"`r format(Sys.time(), '%d %B %Y')`"
+subtitle: "`R`: more data wrangling with `data.table`"
+author: "Grant McDermott (U of Oregon) + Florian Oswald"
+date: "SciencesPo Paris | [Intro to Programming](https://floswald.github.io/ScPoProgramming/)" #"`r format(Sys.time(), '%d %B %Y')`"
 output:
   xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts, "libs/cols.css"] 
+    css: [default, metropolis, metropolis-fonts, "libs/cols.css", "styles.css"] 
     lib_dir: libs
     nature:
       beforeInit: "libs/cols_macro.js"
@@ -69,7 +69,9 @@ opts_chunk$set(
 class: inverse, center, middle
 name: prologue
 
-# Prologue
+# This beautiful set of slides is largely the work of [Grant McDermott](https://grantmcdermott.com/)
+
+I made some minor adjustments. Thanks Grant!
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
 
@@ -1117,7 +1119,7 @@ microbenchmark(collapse_dplyr(), collapse_dt(), collapse_dt_key(), times = 1)
 
 # Example (cont.)
 
-```{r collapse_comp_key, dependson=collapse_dt, dependson=collapse_dplyr, echo=FALSE, message=FALSE}
+```{r collapse_comp_key,  echo=FALSE, message=FALSE}
 storms_dt_key = as.data.table(storms, key = c("name", "year", "month", "day"))
 collapse_dt_key = function() {
   storms_dt_key[, .(wind = mean(wind), pressure = mean(pressure), category = first(category)),
@@ -1295,7 +1297,7 @@ stocks = data.table(time = as.Date('2009-01-01') + 0:1,
 # Reshape from wide to long
 
 Our data are currently in wide format.
-```{r stocks_print, dependson=stocks}
+```{r stocks_print}
 stocks
 ```
 
@@ -1552,7 +1554,7 @@ class: inverse, center, middle
 # Next lecture: Webscraping (1)
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
 
-```{r gen_pdf, include = FALSE, cache = FALSE, eval = TRUE}
+```{r gen_pdf, include = FALSE, cache = FALSE, eval = FALSE}
 infile = list.files(pattern = '.html')
 pagedown::chrome_print(input = infile, timeout = 100)
 ```
