@@ -183,17 +183,25 @@ microbenchmark(collapse_dplyr(), collapse_dt(), times = 1)
 
 
 ```
+## Warning in microbenchmark(collapse_dplyr(), collapse_dt(), times = 1): less
+## accurate nanosecond times to avoid potential integer overflows
+```
+
+```
 ## Unit: milliseconds
-##              expr      min       lq     mean   median       uq      max neval
-##  collapse_dplyr() 467.4547 467.4547 467.4547 467.4547 467.4547 467.4547     1
-##     collapse_dt()   9.2085   9.2085   9.2085   9.2085   9.2085   9.2085     1
+##              expr       min        lq      mean    median        uq       max
+##  collapse_dplyr() 82.688923 82.688923 82.688923 82.688923 82.688923 82.688923
+##     collapse_dt()  7.024161  7.024161  7.024161  7.024161  7.024161  7.024161
+##  neval
+##      1
+##      1
 ```
 ]
 
 --
 
 .small90[
-**Result:** data.table is 50x faster! (Thanks to [Keith Head](https://twitter.com/ckhead) for this example.)
+**Result:** data.table is 10x faster! (Thanks to [Keith Head](https://twitter.com/ckhead) for this example.)
 ]
 
 ---
@@ -1295,7 +1303,7 @@ P.S. Use the `key()` function to see what keys are currently set for your data.t
 
 # Example
 
-Recall the [speed benchmark](#fast) that we saw at the very beginning of the lecture: data.table ended up being 50x faster than dplyr for a fairly standard summarising task.
+Recall the [speed benchmark](#fast) that we saw at the very beginning of the lecture: data.table ended up being 10x faster than dplyr for a fairly standard summarising task.
 
 --
 
@@ -1328,17 +1336,17 @@ microbenchmark(collapse_dplyr(), collapse_dt(), collapse_dt_key(), times = 1)
 
 ```
 ## Unit: milliseconds
-##               expr        min         lq       mean     median         uq
-##   collapse_dplyr() 479.343037 479.343037 479.343037 479.343037 479.343037
-##  collapse_dt_key()   2.893934   2.893934   2.893934   2.893934   2.893934
-##         max neval
-##  479.343037     1
-##    2.893934     1
+##               expr       min        lq      mean    median        uq       max
+##   collapse_dplyr() 72.810055 72.810055 72.810055 72.810055 72.810055 72.810055
+##  collapse_dt_key()  1.241849  1.241849  1.241849  1.241849  1.241849  1.241849
+##  neval
+##      1
+##      1
 ```
 
 --
 
-The keyed data.table version is now **170x** (!!!) faster than dplyr.
+The keyed data.table version is now **60x** (!!!) faster than dplyr.
 --
 
 - That thing you feel... is your face melting.
@@ -1450,8 +1458,8 @@ microbenchmark(merge_dt(), merge_dt_key(), times = 1)
 ```
 ## Unit: milliseconds
 ##            expr      min       lq     mean   median       uq      max neval
-##      merge_dt() 85.45652 85.45652 85.45652 85.45652 85.45652 85.45652     1
-##  merge_dt_key() 48.04773 48.04773 48.04773 48.04773 48.04773 48.04773     1
+##      merge_dt() 56.37685 56.37685 56.37685 56.37685 56.37685 56.37685     1
+##  merge_dt_key() 30.89887 30.89887 30.89887 30.89887 30.89887 30.89887     1
 ```
 
 --
@@ -1504,9 +1512,9 @@ stocks
 ```
 
 ```
-##          time         X        Y         Z
-## 1: 2009-01-01 -1.077879 3.450572 -4.812585
-## 2: 2009-01-02  1.855251 1.294985 -5.138859
+##          time          X          Y        Z
+## 1: 2009-01-01 -0.9021659 -0.6642061 1.026139
+## 2: 2009-01-02  0.7187569 -0.4707169 1.004629
 ```
 
 To convert this into long format, we could do either of the following:
@@ -1519,13 +1527,13 @@ melt(stocks, id.vars ="time")
 ```
 
 ```
-##          time variable     value
-## 1: 2009-01-01        X -1.077879
-## 2: 2009-01-02        X  1.855251
-## 3: 2009-01-01        Y  3.450572
-## 4: 2009-01-02        Y  1.294985
-## 5: 2009-01-01        Z -4.812585
-## 6: 2009-01-02        Z -5.138859
+##          time variable      value
+## 1: 2009-01-01        X -0.9021659
+## 2: 2009-01-02        X  0.7187569
+## 3: 2009-01-01        Y -0.6642061
+## 4: 2009-01-02        Y -0.4707169
+## 5: 2009-01-01        Z  1.0261385
+## 6: 2009-01-02        Z  1.0046290
 ```
 ]]
 
@@ -1537,13 +1545,13 @@ stocks %&gt;%
 ```
 
 ```
-##          time stock     price
-## 1: 2009-01-01     X -1.077879
-## 2: 2009-01-02     X  1.855251
-## 3: 2009-01-01     Y  3.450572
-## 4: 2009-01-02     Y  1.294985
-## 5: 2009-01-01     Z -4.812585
-## 6: 2009-01-02     Z -5.138859
+##          time stock      price
+## 1: 2009-01-01     X -0.9021659
+## 2: 2009-01-02     X  0.7187569
+## 3: 2009-01-01     Y -0.6642061
+## 4: 2009-01-02     Y -0.4707169
+## 5: 2009-01-01     Z  1.0261385
+## 6: 2009-01-02     Z  1.0046290
 ```
 ]]
 
@@ -1561,13 +1569,13 @@ stocks_long
 ```
 
 ```
-##          time stock     price
-## 1: 2009-01-01     X -1.077879
-## 2: 2009-01-02     X  1.855251
-## 3: 2009-01-01     Y  3.450572
-## 4: 2009-01-02     Y  1.294985
-## 5: 2009-01-01     Z -4.812585
-## 6: 2009-01-02     Z -5.138859
+##          time stock      price
+## 1: 2009-01-01     X -0.9021659
+## 2: 2009-01-02     X  0.7187569
+## 3: 2009-01-01     Y -0.6642061
+## 4: 2009-01-02     Y -0.4707169
+## 5: 2009-01-01     Z  1.0261385
+## 6: 2009-01-02     Z  1.0046290
 ```
 
 --
@@ -1581,9 +1589,9 @@ dcast(stocks_long,
 ```
 
 ```
-##          time         X        Y         Z
-## 1: 2009-01-01 -1.077879 3.450572 -4.812585
-## 2: 2009-01-02  1.855251 1.294985 -5.138859
+##          time          X          Y        Z
+## 1: 2009-01-01 -0.9021659 -0.6642061 1.026139
+## 2: 2009-01-02  0.7187569 -0.4707169 1.004629
 ```
 ]]
 
@@ -1596,9 +1604,9 @@ stocks_long %&gt;%
 ```
 
 ```
-##          time         X        Y         Z
-## 1: 2009-01-01 -1.077879 3.450572 -4.812585
-## 2: 2009-01-02  1.855251 1.294985 -5.138859
+##          time          X          Y        Z
+## 1: 2009-01-01 -0.9021659 -0.6642061 1.026139
+## 2: 2009-01-02  0.7187569 -0.4707169 1.004629
 ```
 ]]
 
@@ -1724,17 +1732,17 @@ microbenchmark::microbenchmark(collapse_dplyr(), collapse_dtplyr(), times = 1)
 
 ```
 ## Unit: milliseconds
-##               expr        min         lq       mean     median         uq
-##   collapse_dplyr() 457.257712 457.257712 457.257712 457.257712 457.257712
-##  collapse_dtplyr()   7.025236   7.025236   7.025236   7.025236   7.025236
-##         max neval
-##  457.257712     1
-##    7.025236     1
+##               expr       min        lq      mean    median        uq       max
+##   collapse_dplyr() 71.365830 71.365830 71.365830 71.365830 71.365830 71.365830
+##  collapse_dtplyr()  5.253289  5.253289  5.253289  5.253289  5.253289  5.253289
+##  neval
+##      1
+##      1
 ```
 
 --
 
-A **65x** speed-up for free? I'd take it!
+A **15x** speed-up for free? I'd take it!
 
 --
 
@@ -1799,18 +1807,12 @@ And related packages:
 - https://tysonbarrett.com/tidyfast
 - https://dtplyr.tidyverse.org
 
----
 
-# PS &amp;mdash; Assignment
-
-Your next assignment is up.
-
-Impress me with your data wrangling skills using either the tidyverse or data.table (or both!)
 
 ---
 class: inverse, center, middle
 
-# Next lecture: Webscraping (1)
+# Next lecture: Spatial Data and R
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
 
 
