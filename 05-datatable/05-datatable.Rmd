@@ -14,6 +14,7 @@ output:
       highlightLines: true
       highlightSpans: false
       countIncrementalSlides: false
+      ratio: "16:9"
 ---
 name: toc
 
@@ -1548,7 +1549,7 @@ class: inverse, center, middle
 # Next lecture: Spatial Data and R
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
 
-```{r gen_pdf, include = FALSE, cache = FALSE, eval = FALSE}
+```{r gen_pdf, include = FALSE, cache = FALSE, eval = TRUE}
 infile = list.files(pattern = '.html')
 pagedown::chrome_print(input = infile, timeout = 100)
 ```
