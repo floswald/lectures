@@ -688,10 +688,10 @@ To modify multiple columns simultaneously, we have two options.
 
 --
 
-Personally, I *much* prefer the functional form and so that's what I'll use going forward. E.g.
+Personally, I prefer the first form:
 
 ```{r mod_cols, cache=FALSE}
-DT[, ':=' (y = 3:4, y_name = c("three", "four"))]
+DT[, c("y","y_name") := list(3:4,c("three", "four"))]
 DT ## Another way to print the results instead of appending []
 ```
 
@@ -795,6 +795,7 @@ You can also exclude columns through negation. Try this next code chunk yourself
 starwars_dt[, !c("name", "height")]
 ```
 
+* Mention `%like%` or `grepl` for some `names`
 --
 
 ### Renaming columns
@@ -1251,7 +1252,7 @@ mb_join = microbenchmark(merge_dt(), merge_dt_key(), times = 1)
 mb_join_dt = as.data.table(mb_join) ## For easy calculation in text
 ## Round to nearest multiple of 10
 mbx_join = round((mb_join_dt[expr=="merge_dt()", median(time)] /
-                    mb_join_dt[expr=="merge_dt_key()", median(time)]) / 10) * 10
+                    mb_join_dt[expr=="merge_dt_key()", median(time)]))
 mb_join ## print result
 ```
 

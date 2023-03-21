@@ -772,11 +772,11 @@ To modify multiple columns simultaneously, we have two options.
 
 --
 
-Personally, I *much* prefer the functional form and so that's what I'll use going forward. E.g.
+Personally, I prefer the first form:
 
 
 ```r
-DT[, ':=' (y = 3:4, y_name = c("three", "four"))]
+DT[, c("y","y_name") := list(3:4,c("three", "four"))]
 DT ## Another way to print the results instead of appending []
 ```
 
@@ -927,6 +927,7 @@ You can also exclude columns through negation. Try this next code chunk yourself
 starwars_dt[, !c("name", "height")]
 ```
 
+* Mention `%like%` or `grepl` for some `names`
 --
 
 ### Renaming columns
@@ -1456,15 +1457,23 @@ microbenchmark(merge_dt(), merge_dt_key(), times = 1)
 
 
 ```
+## Warning in microbenchmark(merge_dt(), merge_dt_key(), times = 1): less accurate
+## nanosecond times to avoid potential integer overflows
+```
+
+```
 ## Unit: milliseconds
-##            expr      min       lq     mean   median       uq      max neval
-##      merge_dt() 56.37685 56.37685 56.37685 56.37685 56.37685 56.37685     1
-##  merge_dt_key() 30.89887 30.89887 30.89887 30.89887 30.89887 30.89887     1
+##            expr       min        lq      mean    median        uq       max
+##      merge_dt() 310.46840 310.46840 310.46840 310.46840 310.46840 310.46840
+##  merge_dt_key()  31.29079  31.29079  31.29079  31.29079  31.29079  31.29079
+##  neval
+##      1
+##      1
 ```
 
 --
 
-So, we get about a **0x** speed-up for this simple case just by setting keys. More importantly, ordering your data by setting keys will make a huge difference once you start working with big datasets and making complicated joins. Trust me. (FWIW, the [same is true](https://tysonbarrett.com//jekyll/update/2019/10/11/speed_of_joins/) for dplyr.) 
+So, we get about a **10x** speed-up for this simple case just by setting keys. More importantly, ordering your data by setting keys will make a huge difference once you start working with big datasets and making complicated joins. Trust me. (FWIW, the [same is true](https://tysonbarrett.com//jekyll/update/2019/10/11/speed_of_joins/) for dplyr.) 
 
 ---
 name: reshape
