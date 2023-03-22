@@ -1534,6 +1534,7 @@ As hard as it may be to believe, there's a ton of data.table features that we di
 
 Here are some recommended further resources:
 - http://r-datatable.com (Official website. See the vignettes, especially.)
+- https://h2oai.github.io/db-benchmark/ The ultimate benchmark between different data-wrangling solutions
 - https://github.com/Rdatatable/data.table#cheatsheets (Cheatsheet.)
 - https://atrebas.github.io/post/2019-03-03-datatable-dplyr (Really nice, side-by-side comparisons of common data.table and dplyr operations.)
 - https://brooksandrew.github.io/simpleblog/articles/advanced-data-table/ (Some cool advanced data.table tricks.)
