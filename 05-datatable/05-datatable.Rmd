@@ -1548,7 +1548,7 @@ And related packages:
 ---
 class: inverse, center, middle
 
-# Next lecture: Spatial Data and R
+# Next lecture: Building R Packages
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
 
 ```{r gen_pdf, include = FALSE, cache = FALSE, eval = TRUE}
